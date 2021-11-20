@@ -1,0 +1,51 @@
+.message {
+  display: flex;
+  align-items: flex-end;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    margin-left: 6px;
+
+    &-photos {
+      display: flex;
+      margin-top: 5px;
+    }
+
+    &-photo {
+      object-fit: contain;
+      border-radius: 6px;
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &-bubble {
+      border-radius: 12px 12px 12px 0;
+      border: 1px solid var(--main-color);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      background-color: var(--main-color);
+      color: #fff;
+    }
+  }
+
+  &--is-me {
+    flex-direction: row-reverse;
+
+    & .message__content {
+      margin-right: 6px;
+    }
+
+    & .message__content-bubble {
+      margin-left: 0;
+      border-radius: 12px 12px 0 12px;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      color: var(--black);
+    }
+  }
+}

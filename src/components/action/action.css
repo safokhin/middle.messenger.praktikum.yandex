@@ -1,0 +1,65 @@
+.action {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  position: absolute;
+  padding: 20px;
+  box-shadow: 0 1px 4px #000000a3;
+  border-radius: 12px;
+  width: max-content;
+  background: #fff;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: none;
+    border: none;
+    outline: none;
+    z-index: 2;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border-radius: 12px;
+
+    &-icon {
+      min-width: 15px;
+      min-height: 15px;
+      margin-right: 10px;
+    }
+
+    &-text {
+      font-weight: 500;
+      color: var(--black);
+      letter-spacing: 1px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+
+    & span {
+      transition: color 0.3s ease-in-out;
+    }
+
+    &:hover span {
+      color: #344055;
+    }
+  }
+
+  &--right {
+    left: 0;
+  }
+
+  &--left {
+    right: 0;
+  }
+
+  &--bottom {
+    top: 60px;
+  }
+
+  &--top {
+    bottom: 60px;
+  }
+}

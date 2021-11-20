@@ -1,0 +1,44 @@
+.chat {
+  &__sidebar {
+    width: 315px;
+    min-width: 315px;
+    height: 100%;
+    border-right: 1px solid var(--border-color);
+
+    &-cabinet {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    &-cabinet-name {
+      margin-left: 5px;
+      color: var(--main-color);
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    &-search {
+      padding: 10px 15px;
+    }
+
+    &-messages {
+      max-height: calc(100% - 60px - 74px);
+      overflow-y: auto;
+    }
+  }
+
+  & .search {
+    width: 100%;
+    padding: 10px 15px 10px 45px;
+    outline: none;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-image: url("../../../../static/icons/search.svg");
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: 20px;
+  }
+}
