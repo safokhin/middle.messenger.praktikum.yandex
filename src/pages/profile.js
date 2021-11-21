@@ -20,30 +20,27 @@ const avatarUser = {
 const buttonsProfile = [
   {
     name: "Изменить данные",
+    type: 'button',
   },
   {
     name: "Изменить пароль",
+    type: 'button',
   },
   {
     classes: "warning",
     name: "Выйти",
     page: "authorization",
+    type: 'button',
   },
 ];
 
 const infoPersons = [
-  {
-    value: "asafohin@gmail.com",
-    buttonName: "Почта",
-    classes: "underline",
-    disabled: true,
-  },
-  { value: "Секрет", buttonName: "Логин", classes: "underline", name: 'login' },
-  { value: "Секрет", buttonName: "Имя", classes: "underline", name: 'first_name' },
-  { value: "Секрет", buttonName: "Фамилия", classes: "underline", name: 'second_name' },
-  { value: "Секрет", buttonName: "Имя в чате", classes: "underline", name: 'display_name' },
-  { value: "8 (999) 999-09-99 ", buttonName: "Телефон", classes: "underline", name: 'phone' },
-  { value: "asafohin@gmail.com ", buttonName: "Почта", classes: "underline", name: 'email' },
+  { id: 'login', value: "Секрет", buttonName: "Логин", classes: "underline", name: 'login' },
+  { id: 'first_name', value: "Секрет", buttonName: "Имя", classes: "underline", name: 'first_name' },
+  { id: 'second_name', value: "Секрет", buttonName: "Фамилия", classes: "underline", name: 'second_name' },
+  { id: 'display_name', value: "Секрет", buttonName: "Имя в чате", classes: "underline", name: 'display_name' },
+  { id: 'phone', value: "8 (999) 999-09-99 ", buttonName: "Телефон", classes: "underline", name: 'phone' },
+  { id: 'email', value: "asafohin@gmail.com ", buttonName: "Почта", classes: "underline", name: 'email', disabled: true },
 ];
 
 export const createTemplateProfile = () => {

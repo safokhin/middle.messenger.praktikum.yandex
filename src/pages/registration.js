@@ -4,6 +4,7 @@ import "../components/registerPartials.js";
 
 const groupsTextField = [
   {
+    id: 'email',
     buttonName: "Почта",
     placeholder: "Введите почту",
     errorText: "Некорректная почта",
@@ -11,6 +12,7 @@ const groupsTextField = [
     name: 'email',
   },
   {
+    id: 'login',
     buttonName: "Логин",
     placeholder: "Введите логин",
     errorText: "Некорректный логин",
@@ -18,18 +20,21 @@ const groupsTextField = [
     name: 'login',
   },
   {
+    id: 'first_name',
     buttonName: "Имя",
     placeholder: "Введите имя",
     error: false,
     name: 'first_name',
   },
   {
+    id: 'second_name',
     buttonName: "Фамилия",
     placeholder: "Введите фамилию",
     error: false,
     name: 'second_name',
   },
   {
+    id: 'phone',
     buttonName: "Телефон",
     placeholder: "Введите номер телефона",
     errorText: "Номер телефона введен неверно",
@@ -37,6 +42,7 @@ const groupsTextField = [
     name: 'phone',
   },
   {
+    id: 'password',
     buttonName: "Пароль",
     placeholder: "Введите пароль",
     errorText: "Пароль слишком короткий",
@@ -44,6 +50,7 @@ const groupsTextField = [
     name: 'password',
   },
   {
+    id: 'password-repeat',
     buttonName: "Повторите пароль",
     placeholder: "Повторите пароль",
     errorText: "Пароли не совпадают",

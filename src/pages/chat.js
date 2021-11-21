@@ -23,6 +23,7 @@ const sidebarData = {
     classes: "link",
     name: "Сафохин Артем",
     page: "profile",
+    type: "button",
   },
   messages: [
     {
@@ -59,21 +60,27 @@ const dialogData = {
   buttonClip: {
     classes: "icon",
     icon: iconClip,
+    type: "button",
   },
   buttonSend: {
-    classes: "icon",
+    classes: "icon button_icon-message",
     icon: iconSend,
+    type: "submit",
   },
   actionMore: {
     classes: "action--left action--bottom",
     actions: [
       {
+        classes: 'icon',
         icon: iconPlus,
-        text: "Добавить пользователя",
+        iconText: "Добавить пользователя",
+        type: 'button',
       },
       {
+        classes: 'icon',
         icon: iconRemove,
-        text: "Удалить пользователя",
+        iconText: "Удалить пользователя",
+        type: 'button',
       },
     ],
   },
@@ -81,26 +88,34 @@ const dialogData = {
     classes: "action--right action--top",
     actions: [
       {
+        classes: 'icon',
         icon: iconPhoto,
-        text: "Фото или видео",
+        iconText: "Фото или видео",
+        type: 'button'
       },
       {
+        classes: 'icon',
         icon: iconFile,
-        text: "Файл",
+        iconText: "Файл",
+        type: 'button'
       },
       {
+        classes: 'icon',
         icon: iconLocation,
-        text: "Локация",
+        iconText: "Локация",
+        type: 'button',
       },
     ],
   },
   buttonMore: {
+    type: "button",
     classes: "icon",
     icon: iconMore,
   },
   inputMessage: {
     placeholder: "Введите текст сообщения...",
     name: "message",
+    id: "message",
   },
   messages: [
     {

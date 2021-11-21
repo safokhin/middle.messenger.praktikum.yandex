@@ -1,7 +1,7 @@
 //language=hbs
 export default `
 <div class="page-authorization page-container">
-    <div class="popup">
+    <form class="popup" method="post">
         <div class="popup__header">
             <span class="popup__header-title">Войти в аккаунт</span>
             <span class="popup__header-subtitle">Пожалуйста, войдите в аккаунт</span>
@@ -15,6 +15,6 @@ export default `
             <div class="popup__row">{{> button buttonAuth }}</div>
             <span class="popup__link">{{> button buttonRegistration}}</span>
         </div>
-    </div>
+    </form>
 </div>
 `;

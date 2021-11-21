@@ -1,10 +1,14 @@
 //language=hbs
 export default `
-    <input 
-      class="input {{ classes }}" 
-      type="text" 
-      value="{{ value }}"
-      placeholder="{{ placeholder }}"
-      name="{{ name }}"
-    />
+    <label class="input-label">
+        <input
+            id="{{ id }}"
+            class="input {{ classes }}"
+            type="{{#if type }}{{ type }}{{ else }}text{{/if }}"
+            value="{{ value }}"
+            placeholder="{{ placeholder }}"
+            name="{{ name }}"
+        />
+        {{#if labelText}}<span>{{ labelText }}</span>{{/if}}
+    </label>
 `;

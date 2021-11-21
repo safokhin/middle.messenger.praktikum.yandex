@@ -4,6 +4,7 @@ import "../components/registerPartials";
 
 const groupsTextField = [
   {
+    id: 'login',
     buttonName: "Логин",
     placeholder: "Введите логин",
     errorText: "Некорректный логин",
@@ -11,6 +12,7 @@ const groupsTextField = [
     name: 'login',
   },
   {
+    id: 'password',
     buttonName: "Пароль",
     placeholder: "Введите пароль",
     errorText: "Некорректный пароль",
@@ -23,12 +25,13 @@ const buttonRegistration = {
   classes: "link",
   name: "Регистрация",
   page: "registration",
+  type: "button"
 };
 
 const buttonAuth = {
   name: "Войти",
-  id: "test",
   page: "chat",
+  type: "submit"
 };
 
 export const createTemplateAuth = () => {

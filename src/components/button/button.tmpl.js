@@ -1,6 +1,7 @@
 //language=hbs
 export default `
-    <button 
+    <button
+        type="{{ type }}"    
         class="button {{ classes }}" 
         id="{{ id }}" 
         {{#if page}} onclick="changePage('{{ page }}')" {{/if}}
@@ -9,6 +10,6 @@ export default `
             <img class="button__img" src="{{ icon }}" alt="">
             {{#if iconText}} <span class="button__icon-text">{{ iconText }}</span> {{/if}}
         {{/if}}
-        <span>{{ name }}</span>
+        {{#if name}} <span>{{ name }}</span> {{/if}}
     </button>
 `;

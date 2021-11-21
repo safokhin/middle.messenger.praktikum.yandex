@@ -1,5 +1,11 @@
 .input {
   width: 100%;
   border: none;
-  outline: none;
+  outline-color: var(--main-color);
+  outline-width: thin;
+  outline-offset: 5px;
+}
+
+.input-label {
+  width: 100%;
 }

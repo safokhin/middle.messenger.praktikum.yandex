@@ -17,14 +17,14 @@ export default `
                 {{> message }}
             {{/each}}
         </div>
-        <div class="chat__input">
+        <form class="chat__input" method="post">
             <span class="chat__input-clip">
                 {{> button buttonClip }}
                 {{> action actionClip }}
             </span>
             {{> input inputMessage }}
             {{> button buttonSend }}
-        </div>
+        </form>
         {{/if}}
     </div>
 `;

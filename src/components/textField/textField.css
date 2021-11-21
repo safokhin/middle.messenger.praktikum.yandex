@@ -12,7 +12,7 @@
     margin-bottom: 8px;
   }
 
-  &__field {
+  &__input {
     background: none;
     border: 1px solid var(--main-color);
     padding: 12px 20px;
@@ -39,11 +39,14 @@
       margin-bottom: 0;
     }
 
-    & .text-field__field {
+    & .text-field__input {
       padding: 0;
       border: none;
       text-align: right;
       margin-left: 10px;
+      outline-color: var(--main-color);
+      outline-width: thin;
+      outline-offset: 6px;
     }
   }
 }

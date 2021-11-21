@@ -10,7 +10,7 @@ export default `
       <div class="dialog-item__info">
           <div class="dialog-item__info-row">
               <span class="dialog-item__name">{{ author }}</span>
-              <span class="dialog-item__time">{{ time }}</span>
+              <time class="dialog-item__time">{{ time }}</time>
           </div>
           <div class="dialog-item__info-row">
               <span class="dialog-item__message">{{ message }}</span>

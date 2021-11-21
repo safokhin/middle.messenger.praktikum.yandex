@@ -1,9 +1,10 @@
 //language=hbs
 export default `
   <div class="text-field {{ classes }}">
-      <span class="text-field__name">{{ buttonName }}</span>
+      <label class="text-field__name" for="{{ id }}">{{ buttonName }}</label>
       <input 
-          class="text-field__field" 
+          id='{{ id }}'
+          class="text-field__input" 
           type="text" 
           placeholder="{{ placeholder }}" 
           name="{{ name }}" 
