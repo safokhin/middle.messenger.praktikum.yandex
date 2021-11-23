@@ -1,0 +1,128 @@
+.profile {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0 10px 10px 10px;
+
+  &__row {
+    display: flex;
+
+    &-buttons {
+      min-width: 40%;
+      margin-top: 15px;
+      & .button {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  &__info {
+    width: 450px;
+    margin-left: 30px;
+
+    & .popup__row {
+      width: 100%;
+    }
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    position: relative;
+
+    &-line {
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      background-color: var(--main-color);
+      border-radius: 0 0 6px 6px;
+      left: 0;
+      bottom: 0;
+    }
+  }
+
+  &__name {
+    font-weight: 500;
+    color: var(--black);
+    font-size: 18px;
+    margin-top: 15px;
+    max-width: 220px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 80px;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 5;
+
+    & .button {
+      &__img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &-text {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-left: 10px;
+      color: var(--main-color);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .profile {
+    &__box {
+      margin-left: 0;
+    }
+
+    &__content {
+      height: max-content;
+      padding: 30px 0;
+    }
+
+    &__box {
+      padding: 10px;
+      width: 100%;
+    }
+
+    &__row {
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+
+      & .profile__info {
+        margin-top: 30px;
+      }
+    }
+
+    & .text-field {
+      max-width: 100%;
+    }
+  }
+}

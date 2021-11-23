@@ -1,0 +1,35 @@
+.action {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  position: absolute;
+  padding: 20px;
+  box-shadow: 0 1px 4px #000000a3;
+  border-radius: 12px;
+  width: max-content;
+  background: #fff;
+
+  & .button:not(:last-child) {
+    margin-bottom: 12px;
+  }
+
+  & .button__img {
+    min-width: 12px;
+  }
+
+  &--right {
+    left: 0;
+  }
+
+  &--left {
+    right: 0;
+  }
+
+  &--bottom {
+    top: 60px;
+  }
+
+  &--top {
+    bottom: 60px;
+  }
+}

@@ -1,0 +1,15 @@
+@import "./variables.css";
+@import "./common.css";
+
+@import "../components/action/action.css";
+@import "../components/message/message.css";
+@import "../components/input/input.css";
+@import "../components/button/button.css";
+@import "../components/textField/textField.css";
+@import "../components/avatar/avatar.css";
+@import "../components/chat/dialogItem/dialogItem.css";
+
+@import "../components/profile/profile.css";
+@import "../components/chat/chat.css";
+@import "../components/authorization/authorization.css";
+@import "../components/registration/registration.css";
