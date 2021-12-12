@@ -24,5 +24,5 @@ export const createTmpl = (fragment: DocumentFragment): void => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  createTemplateChat();
+  createTmplAuth();
 });
