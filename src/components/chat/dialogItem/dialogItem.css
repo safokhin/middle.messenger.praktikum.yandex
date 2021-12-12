@@ -2,9 +2,11 @@
   display: flex;
   width: 100%;
   padding: 10px 15px;
+  border: none;
   border-top: 1px solid var(--border-color);
   transition: 0.3s ease-in-out;
   cursor: pointer;
+  outline: none;
 
   &__avatar {
     margin-right: 8px;

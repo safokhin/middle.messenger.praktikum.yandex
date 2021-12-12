@@ -59,4 +59,8 @@
   &.warning {
     background: var(--danger-color);
   }
+
+  &--invisible {
+    display: none !important;
+  }
 }

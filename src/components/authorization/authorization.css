@@ -1,18 +1,18 @@
 @media screen and (max-width: 992px) {
-    .page-authorization {
-        & .popup {
-            max-height: 100vh;
-            height: 100%;
-            width: 100%;
-            overflow-y: auto;
+  .page-authorization {
+    & .popup {
+      max-height: 100vh;
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
 
-            &__content {
-                max-height: none;
-            }
+      &__content {
+        max-height: none;
+      }
 
-            &:after {
-                display: none;
-            }
-        }
+      &:after {
+        display: none;
+      }
     }
+  }
 }

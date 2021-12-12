@@ -1,0 +1,16 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2017",
+    "module": "commonjs",
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "declaration": false,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "typeRoots": ["./src/@types", "./node_modules/@types"],
+    "rootDir": "src"
+  }
+}
