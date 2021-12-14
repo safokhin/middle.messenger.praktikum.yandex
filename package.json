@@ -9,8 +9,8 @@
   },
   "scripts": {
     "start": "parcel static/index.html -p 3000",
-    "build": "parcel build static/index.html && node server.js",
-    "deploy": "parcel build static/index.html",
+    "build": "parcel build static/index.html _redirects && node server.js",
+    "deploy": "parcel build static/index.html _redirects",
     "linter": "eslint ."
   },
   "devDependencies": {
