@@ -9,9 +9,14 @@
   },
   "scripts": {
     "start": "parcel static/index.html -p 3000",
-    "build": "parcel build static/index.html _redirects && node server.js",
-    "deploy": "parcel build static/index.html _redirects",
+    "build": "parcel build static/index.html && node server.js",
+    "deploy": "parcel build static/index.html",
     "linter": "eslint ."
+  },
+  "staticFiles": {
+    "staticPath": [
+      "./_redirects"
+    ]
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.1",
@@ -38,6 +43,7 @@
     "handlebars": "^4.7.7",
     "nanoid": "^3.1.30",
     "normalize.css": "^8.0.1",
+    "parcel-plugin-static-files-copy": "^2.6.0",
     "sidebar": "^1.0.2",
     "src": "^1.1.2"
   }
