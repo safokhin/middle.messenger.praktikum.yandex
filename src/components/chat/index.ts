@@ -2,7 +2,7 @@ import { Block } from "../../modules/Block";
 import { chatTmpl } from "./chat.tmpl";
 
 export default class ChatPage extends Block {
-  constructor(props: any) {
+  constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
   }

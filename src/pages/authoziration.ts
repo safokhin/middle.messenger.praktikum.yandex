@@ -2,6 +2,7 @@ import Button from "../components/button";
 import AuthorizationPage from "../components/authorization";
 import { changePage, createTmpl } from "./index";
 import TextField from "../components/textField";
+import { handlerErrors } from "../util/validation";
 
 const onFinish = (): void => {
   const loginElement = <HTMLInputElement>(
@@ -10,25 +11,15 @@ const onFinish = (): void => {
   const passwordElement = <HTMLInputElement>(
     document.querySelector('[name="password"]')
   );
-  // ТЕСТ, потом поменять
+
   if (loginElement !== null && passwordElement !== null) {
     const loginValue = loginElement.value;
     const passwordValue = passwordElement.value;
+    const loginError = handlerErrors("LOGIN", loginValue, login);
+    const passwordError = handlerErrors("PASSWORD", passwordValue, password);
 
-    if (loginValue === "admin" && passwordValue === "admin") {
+    if (!loginError && !passwordError) {
       changePage("chat");
-    }
-
-    if (loginValue !== "admin") {
-      login.setProps({ errorText: "Логин - admin", value: loginValue });
-    } else {
-      login.setProps({ errorText: "", value: loginValue });
-    }
-
-    if (passwordValue !== "admin") {
-      password.setProps({ errorText: "Пароль - admin", value: passwordValue });
-    } else {
-      password.setProps({ errorText: "", value: passwordValue });
     }
   }
 };

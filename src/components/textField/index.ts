@@ -2,7 +2,7 @@ import { Block } from "../../modules/Block";
 import { textFieldsTmpl } from "./textField.tmpl";
 
 export default class TextField extends Block {
-  constructor(props: any) {
+  constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
   }

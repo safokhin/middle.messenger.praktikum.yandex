@@ -32,8 +32,8 @@ const buttonsProfile = [
   new Button({
     classes: "warning",
     name: "Выйти",
-    page: "authorization",
     type: "button",
+    click: () => changePage("authorization"),
   }),
 ];
 

@@ -2,7 +2,7 @@ import { Block } from "../../modules/Block";
 import { authorizationTmpl } from "./authorization.tmpl";
 
 export default class AuthorizationPage extends Block {
-  constructor(props: any) {
+  constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
   }

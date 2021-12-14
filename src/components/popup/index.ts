@@ -2,7 +2,7 @@ import { Block } from "../../modules/Block";
 import { popupTmpl } from "./popup.tmpl";
 
 export default class Popup extends Block {
-  constructor(props: any) {
+  constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
   }

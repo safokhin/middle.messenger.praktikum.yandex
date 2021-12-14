@@ -70,9 +70,14 @@ class HTTPTransport {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url + data);
+
+      xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
       if (headers) xhr.setRequestHeader(headers, "");
 
-      xhr.onload = () => resolve(xhr);
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) resolve(xhr);
+        else reject;
+      };
       xhr.onabort = reject;
       xhr.onerror = reject;
       if (timeout) {

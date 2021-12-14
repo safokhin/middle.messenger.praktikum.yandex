@@ -2,7 +2,7 @@ import { Block } from "../../modules/Block";
 import { inputTmpl } from "./input.tmpl";
 
 export default class Input extends Block {
-  constructor(props: any) {
+  constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
   }

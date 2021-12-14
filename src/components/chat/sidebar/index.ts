@@ -2,7 +2,7 @@ import { Block } from "../../../modules/Block";
 import { sidebarTmpl } from "./sidebar.tmpl";
 
 export default class Sidebar extends Block {
-  constructor(props: any) {
+  constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
   }

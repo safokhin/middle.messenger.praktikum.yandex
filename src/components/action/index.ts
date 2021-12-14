@@ -2,7 +2,7 @@ import { Block } from "../../modules/Block";
 import { actionTmpl } from "./action.tmpl";
 
 export default class Action extends Block {
-  constructor(props: any) {
+  constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
   }

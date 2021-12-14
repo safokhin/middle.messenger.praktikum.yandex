@@ -2,7 +2,7 @@ import { Block } from "../../../modules/Block";
 import { dialogItem } from "./dialogItem.tmpl";
 
 export default class DialogItem extends Block {
-  constructor(props: any) {
+  constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
   }

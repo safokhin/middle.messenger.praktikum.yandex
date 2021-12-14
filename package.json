@@ -8,10 +8,10 @@
     "node": "14.17.0"
   },
   "scripts": {
-    "start": "./node_modules/.bin/parcel static/index.html -p 3000",
-    "build": "./node_modules/.bin/parcel build static/index.html --target node && node server.js",
-    "deploy": "./node_modules/.bin/parcel build static/index.html --target node",
-    "linter": "./node_modules/.bin/eslint ."
+    "start": "parcel static/index.html -p 3000",
+    "build": "parcel build static/index.html --target node && node server.js",
+    "deploy": "parcel build static/index.html --target node",
+    "linter": "eslint ."
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.1",
