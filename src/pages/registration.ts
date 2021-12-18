@@ -16,7 +16,7 @@ const onFinish = () => {
     }
   });
 
-  if (successRegistration) changePage("chat");
+  if (successRegistration) changePage("/chat");
 };
 
 const email = new TextField({
@@ -133,7 +133,7 @@ const buttonAuth = new Button({
   name: "Авторизация",
   type: "button",
   page: "authorization",
-  click: () => changePage("authorization"),
+  click: () => changePage("/authorization"),
 });
 
 const registrationPage = new Registration({

@@ -54,7 +54,7 @@ const buttonRegistration = new Button({
   name: "Регистрация",
   page: "registration",
   type: "button",
-  click: () => changePage("registration"),
+  click: () => changePage("/registration"),
 });
 
 const authorizationPage = new AuthorizationPage({

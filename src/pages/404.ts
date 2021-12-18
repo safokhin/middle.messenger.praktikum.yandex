@@ -10,7 +10,7 @@ const page404 = new Popup({
     classes: "link",
     name: "Назад к чатам",
     type: "button",
-    click: () => changePage("chat"),
+    click: () => changePage("/chat"),
   }),
 });
 

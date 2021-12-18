@@ -4,14 +4,20 @@ import { createTemplateChat } from "./chat";
 import { createTmplProfile } from "./profile";
 import { createTmpl404 } from "./404";
 import { createTmpl500 } from "./500";
+import { Router } from "../service/Router";
 
-export const changePage = (page: string): void => {
-  if (page === "registration") createTmplReg();
-  if (page === "authorization") createTmplAuth();
-  if (page === "chat") createTemplateChat();
-  if (page === "profile") createTmplProfile();
-  if (page === "404") createTmpl404();
-  if (page === "500") createTmpl500();
+const router = new Router();
+
+router
+  .use("/authorization", createTmplAuth)
+  .use("/registration", createTmplReg)
+  .use("/chat", createTemplateChat)
+  .use("/profile", createTmplProfile)
+  .use("/404", createTmpl404)
+  .use("/500", createTmpl500);
+
+export const changePage = (url: string): void => {
+  router.go(url);
 };
 
 // Универсальный метод для монтирования страниц
@@ -24,5 +30,5 @@ export const createTmpl = (fragment: DocumentFragment): void => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  createTmplAuth();
+  router.start();
 });

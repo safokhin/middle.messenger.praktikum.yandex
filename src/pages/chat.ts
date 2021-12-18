@@ -31,7 +31,7 @@ const sidebarData = new Sidebar({
     name: "Сафохин Артем",
     page: "profile",
     type: "button",
-    click: () => changePage("profile"),
+    click: () => changePage("/profile"),
   }),
   messages: [
     new DialogItem({

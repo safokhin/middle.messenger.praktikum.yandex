@@ -10,7 +10,7 @@ const buttonBack = new Button({
   icon: iconClip,
   iconText: "Назад",
   page: "chat",
-  click: () => changePage("chat"),
+  click: () => changePage("/chat"),
 });
 
 const avatarUser = new Avatar({
@@ -33,7 +33,7 @@ const buttonsProfile = [
     classes: "warning",
     name: "Выйти",
     type: "button",
-    click: () => changePage("authorization"),
+    click: () => changePage("/authorization"),
   }),
 ];
 
