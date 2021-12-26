@@ -2,7 +2,7 @@
 // big - 120x120
 //language=hbs
 export const avatarTmpl = `
-  <div 
+  <button 
       class="avatar {{ classes }} {{#if isEmptyPhoto}} avatar--empty {{/if}}"
   >
       {{#if isEmptyPhoto}}
@@ -10,5 +10,5 @@ export const avatarTmpl = `
       {{else}}
         <img src="{{ srcImage }}" alt="">
       {{/if}}
-  </div>
+  </button>
 `;

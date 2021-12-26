@@ -36,6 +36,7 @@
     border: 1px solid var(--border-color);
     border-radius: 6px;
     position: relative;
+    min-width: 300px;
 
     &-line {
       position: absolute;

@@ -65,11 +65,8 @@ const checkPhone = (value: string) => {
   return "";
 };
 
-export const handlerErrors = (
-  validName: string,
-  value: string,
-  element: any
-) => {
+export const handlerErrors = (value: string, element: any, valid?: string) => {
+  const validName = valid || element.props.validName;
   const validFunction = checkField[validName];
   if (validFunction) {
     const errorText = validFunction(value);
@@ -77,4 +74,27 @@ export const handlerErrors = (
     return errorText;
   }
   return "";
+};
+
+export const checkAllFieldsErrors = (data: any[]) => {
+  const fields: { [key: string]: string } = {};
+  let successRegistration = true;
+
+  data.forEach(
+    (element: {
+      props: { name: string; value: string; validName: string };
+    }) => {
+      const value =
+        element.props.value === undefined ? "" : element.props.value;
+      fields[element.props.name] = value;
+
+      const error = handlerErrors(value, element, element.props.validName);
+      if (error !== "") successRegistration = false;
+    }
+  );
+
+  return {
+    check: successRegistration,
+    fields,
+  };
 };

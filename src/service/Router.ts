@@ -24,11 +24,19 @@ export class Router {
   }
 
   start() {
+    let pathname = window.location.pathname;
+
+    const filterRoute = this.routes.filter(
+      (route) => route._pathname === pathname
+    );
+
+    if (filterRoute.length === 0) pathname = "/404";
+
     window.onpopstate = ((event: any) => {
       this._onRoute(event.currentTarget.location.pathname);
     }).bind(this);
 
-    this._onRoute(window.location.pathname);
+    this._onRoute(pathname);
   }
 
   go(pathname: string) {
@@ -75,3 +83,5 @@ class Route {
     }
   }
 }
+
+export const router = new Router();

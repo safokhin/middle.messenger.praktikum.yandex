@@ -4,6 +4,19 @@
   align-items: flex-start;
   width: 100%;
 
+  &.file {
+    border: none !important;
+    & .text-field__input {
+      display: none;
+    }
+    & .text-field__name {
+      width: 100%;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
   &__name {
     color: var(--main-color);
     letter-spacing: 2px;
@@ -33,6 +46,13 @@
     justify-content: space-between;
     padding: 10px 0;
     border-bottom: 1px solid var(--main-color);
+    position: relative;
+
+    & .text-field__error {
+      position: absolute;
+      bottom: -17px;
+      left: 0;
+    }
 
     & .text-field__name {
       min-width: 100px;

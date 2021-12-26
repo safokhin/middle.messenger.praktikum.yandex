@@ -13,6 +13,7 @@ export const registrationTmpl = `
             <div class="popup__row">{{{ buttonRegistration }}}</div>
             <span class="popup__link">{{{ buttonAuth }}}</span>
         </div>
+        {{#if error}}<div class="popup__error">{{ error }}</div>{{/if}}
     </form>
 </div>
 `;

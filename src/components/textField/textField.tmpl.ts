@@ -5,7 +5,7 @@ export const textFieldsTmpl = `
       <input 
           id='{{ id }}'
           class="text-field__input" 
-          type="text" 
+          type="{{#if type}}{{ type }}{{else}} text {{/if}}" 
           placeholder="{{ placeholder }}" 
           name="{{ name }}" 
           value="{{ value }}" 

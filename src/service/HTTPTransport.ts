@@ -5,12 +5,7 @@ const METHODS = {
   DELETE: "DELETE",
 };
 
-type requestProps = (
-  url: string,
-  options: {
-    [key: string]: any;
-  }
-) => void;
+type requestProps = (url: string, options: any) => Promise<object>;
 
 function queryStringify(data: object) {
   return Object.entries(data).reduce((acc, curr, index, arr) => {
@@ -23,75 +18,74 @@ function queryStringify(data: object) {
     return acc;
   }, "");
 }
-class HTTPTransport {
-  get: requestProps = (url: string, options) => {
-    const query = queryStringify(options.data);
-    return this.request(
-      url,
-      { ...options, data: query, method: METHODS.GET },
-      options.timeout
-    );
+
+export class HTTPTransport {
+  get: requestProps = (url, options) => {
+    return this.request(url, { ...options, method: METHODS.GET });
   };
 
-  post: requestProps = (url, options) => {
-    const query = queryStringify(options.data);
-    return this.request(
-      url,
-      { ...options, data: query, method: METHODS.POST },
-      options.timeout
-    );
+  post: requestProps = (url, options = {}) => {
+    return this.request(url, { ...options, method: METHODS.POST });
   };
 
   put: requestProps = (url, options) => {
-    const query = queryStringify(options.data);
-    return this.request(
-      url,
-      { ...options, data: query, method: METHODS.POST },
-      options.timeout
-    );
+    return this.request(url, { ...options, method: METHODS.PUT });
   };
 
   delete: requestProps = (url, options) => {
-    const query = queryStringify(options.data);
-    return this.request(
-      url,
-      { ...options, data: query, method: METHODS.POST },
-      options.timeout
-    );
+    return this.request(url, { ...options, method: METHODS.DELETE });
   };
 
   request = (
     url: string,
-    options: { [key: string]: string },
-    timeout = 5000
-  ) => {
+    options: {
+      data?: any;
+      method: string;
+      headers: { [key: string]: string };
+    },
+    timeout: number = 5000
+  ): Promise<object> => {
     const { method, data, headers } = options;
 
     return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open(method, url + data);
+      if (!method) {
+        reject("No method");
+        return;
+      }
+      let checkJsonContent = false;
 
-      xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-      if (headers) xhr.setRequestHeader(headers, "");
+      const xhr = new XMLHttpRequest();
+      const isGet = method === METHODS.GET;
+
+      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+
+      xhr.withCredentials = true;
+      Object.keys(headers).forEach((key) => {
+        if (key === "Content-type") checkJsonContent = true; // TODO: Переделать
+        xhr.setRequestHeader(key, headers[key]);
+      });
 
       xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) resolve(xhr);
-        else reject;
+        else reject(xhr);
       };
+
       xhr.onabort = reject;
       xhr.onerror = reject;
       if (timeout) {
         // @ts-ignore
         xhr.ontimeout = setTimeout(() => {
-          reject;
+          reject(xhr);
         }, timeout);
       }
 
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        checkJsonContent ? xhr.send(JSON.stringify(data)) : xhr.send(data);
       }
     });
   };
 }
+
+export default new HTTPTransport();

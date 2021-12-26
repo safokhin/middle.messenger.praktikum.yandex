@@ -9,10 +9,10 @@ import { Router } from "../service/Router";
 const router = new Router();
 
 router
-  .use("/authorization", createTmplAuth)
-  .use("/registration", createTmplReg)
-  .use("/chat", createTemplateChat)
-  .use("/profile", createTmplProfile)
+  .use("/", createTmplAuth)
+  .use("/sign-up", createTmplReg)
+  .use("/messenger", createTemplateChat)
+  .use("/settings", createTmplProfile)
   .use("/404", createTmpl404)
   .use("/500", createTmpl500);
 
@@ -28,7 +28,3 @@ export const createTmpl = (fragment: DocumentFragment): void => {
     root.appendChild(fragment);
   }
 };
-
-document.addEventListener("DOMContentLoaded", () => {
-  router.start();
-});

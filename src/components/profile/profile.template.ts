@@ -9,7 +9,7 @@ export const profileTmpl = `
               <div class="profile__row">
                   <div class="profile__box">
                       {{{ avatarUser }}}
-                      <span class="profile__name">Сафохин Артем Анатольевич</span>
+                      <span class="profile__name">{{ fullname }}</span>
                       <div class="profile__box-line"></div>
                   </div>
 
@@ -22,5 +22,7 @@ export const profileTmpl = `
                 </div>
           </div>
       </div>
+      {{#if changeAvatarPopup}} {{{ changeAvatarPopup }}} {{/if}}
+      {{#if error}} {{ error }} {{/if}}
   </div>
 `;

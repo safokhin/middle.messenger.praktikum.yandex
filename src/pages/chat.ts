@@ -19,19 +19,15 @@ import Input from "../components/input";
 import Action from "../components/action";
 import Message from "../components/message";
 
-const sidebarData = new Sidebar({
+export const sidebarData = new Sidebar({
   profileAvatar: new Avatar({
-    nameSymbol: "SA",
     classes: "small",
-    isEmptyPhoto: true,
-    srcImage: "https://source.unsplash.com/user/erondu/50x50",
   }),
   profileButton: new Button({
     classes: "link",
     name: "Сафохин Артем",
-    page: "profile",
     type: "button",
-    click: () => changePage("/profile"),
+    click: () => changePage("/settings"),
   }),
   messages: [
     new DialogItem({

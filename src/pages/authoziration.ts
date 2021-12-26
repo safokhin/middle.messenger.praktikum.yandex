@@ -3,41 +3,28 @@ import AuthorizationPage from "../components/authorization";
 import { changePage, createTmpl } from "./index";
 import TextField from "../components/textField";
 import { handlerErrors } from "../util/validation";
-
-const onFinish = (): void => {
-  const loginElement = <HTMLInputElement>(
-    document.querySelector('[name="login"]')
-  );
-  const passwordElement = <HTMLInputElement>(
-    document.querySelector('[name="password"]')
-  );
-
-  if (loginElement !== null && passwordElement !== null) {
-    const loginValue = loginElement.value;
-    const passwordValue = passwordElement.value;
-    const loginError = handlerErrors("LOGIN", loginValue, login);
-    const passwordError = handlerErrors("PASSWORD", passwordValue, password);
-
-    if (!loginError && !passwordError) {
-      changePage("chat");
-    }
-  }
-};
+import { authController } from "../controllers/authController";
 
 const login = new TextField({
-  id: "login",
   buttonName: "Логин",
   placeholder: "Введите логин",
   name: "login",
+  validName: "LOGIN",
   containerClass: "popup__row",
+  blur: (event: { target: HTMLInputElement }) => {
+    handlerErrors(event.target.value.trim(), login);
+  },
 });
 
 const password = new TextField({
-  id: "password",
   buttonName: "Пароль",
   placeholder: "Введите пароль",
   name: "password",
+  validName: "PASSWORD",
   containerClass: "popup__row",
+  blur: (event: { target: HTMLInputElement }) => {
+    handlerErrors(event.target.value.trim(), password);
+  },
 });
 
 const groupsTextField = [login, password];
@@ -46,7 +33,7 @@ const buttonAuth = new Button({
   name: "Войти",
   page: "chat",
   type: "button",
-  click: onFinish,
+  click: (): void => authController.signInUser(groupsTextField),
 });
 
 const buttonRegistration = new Button({
@@ -54,10 +41,10 @@ const buttonRegistration = new Button({
   name: "Регистрация",
   page: "registration",
   type: "button",
-  click: () => changePage("/registration"),
+  click: () => changePage("/sign-up"),
 });
 
-const authorizationPage = new AuthorizationPage({
+export const authorizationPage = new AuthorizationPage({
   buttonRegistration,
   buttonAuth,
   groupsTextField,

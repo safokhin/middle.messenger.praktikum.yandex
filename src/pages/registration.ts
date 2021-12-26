@@ -3,112 +3,83 @@ import TextField from "../components/textField";
 import Registration from "../components/registration";
 import Button from "../components/button";
 import { handlerErrors } from "../util/validation";
-
-const onFinish = () => {
-  let successRegistration = true;
-  groupsTextField.forEach((elem) => {
-    const value = elem.props.value ? elem.props.value : "";
-    const validName = elem.props.validName;
-
-    if (typeof validName === "string" && typeof value === "string") {
-      const error = handlerErrors(validName, value, elem);
-      if (error !== "") successRegistration = false;
-    }
-  });
-
-  if (successRegistration) changePage("/chat");
-};
+import { authController } from "../controllers/authController";
 
 const email = new TextField({
-  id: "email",
   buttonName: "Почта",
   placeholder: "Введите почту",
   name: "email",
   containerClass: "popup__row",
   validName: "EMAIL",
   blur: (event: { target: HTMLInputElement }) => {
-    const validName = <string>email.props.validName;
-    const value = event.target.value.trim();
-    handlerErrors(validName, value, email);
+    handlerErrors(event.target.value.trim(), email);
   },
 });
 
 const login = new TextField({
-  id: "login",
   buttonName: "Логин",
   placeholder: "Введите логин",
   name: "login",
   validName: "LOGIN",
   containerClass: "popup__row",
   blur: (event: { target: HTMLInputElement }) => {
-    const validName = <string>login.props.validName;
-    const value = event.target.value.trim();
-    handlerErrors(validName, value, login);
+    handlerErrors(event.target.value.trim(), login);
   },
 });
 
 const firstName = new TextField({
-  id: "first_name",
   buttonName: "Имя",
   placeholder: "Введите имя",
   name: "first_name",
   containerClass: "popup__row",
   validName: "NAME",
   blur: (event: { target: HTMLInputElement }) => {
-    const validName = <string>firstName.props.validName;
-    const value = event.target.value.trim();
-    handlerErrors(validName, value, firstName);
+    handlerErrors(event.target.value.trim(), firstName);
   },
 });
 
 const secondName = new TextField({
-  id: "second_name",
   buttonName: "Фамилия",
   placeholder: "Введите фамилию",
   name: "second_name",
   containerClass: "popup__row",
   validName: "NAME",
   blur: (event: { target: HTMLInputElement }) => {
-    const validName = <string>secondName.props.validName;
-    const value = event.target.value.trim();
-    handlerErrors(validName, value, secondName);
+    handlerErrors(event.target.value.trim(), secondName);
   },
 });
 
 const phone = new TextField({
-  id: "phone",
   buttonName: "Телефон",
   placeholder: "Введите номер телефона",
   name: "phone",
   validName: "PHONE",
   containerClass: "popup__row",
   blur: (event: { target: HTMLInputElement }) => {
-    const validName = <string>phone.props.validName;
-    const value = event.target.value.trim();
-    handlerErrors(validName, value, phone);
+    handlerErrors(event.target.value.trim(), phone);
   },
 });
 
 const password = new TextField({
-  id: "password",
   buttonName: "Пароль",
   placeholder: "Введите пароль",
   name: "password",
   validName: "PASSWORD",
   containerClass: "popup__row",
   blur: (event: { target: HTMLInputElement }) => {
-    const validName = <string>password.props.validName;
-    const value = event.target.value.trim();
-    handlerErrors(validName, value, password);
+    handlerErrors(event.target.value.trim(), password);
   },
 });
 
 const passwordRepeat = new TextField({
-  id: "password-repeat",
   buttonName: "Повторите пароль",
   placeholder: "Повторите пароль",
   name: "password-repeat",
+  validName: "PASSWORD",
   containerClass: "popup__row",
+  blur: (event: { target: HTMLInputElement }) => {
+    handlerErrors(event.target.value.trim(), passwordRepeat);
+  },
 });
 
 const groupsTextField = [
@@ -125,7 +96,7 @@ const buttonRegistration = new Button({
   name: "Регистрация",
   type: "button",
   page: "chat",
-  click: onFinish,
+  click: (): void => authController.signUpUser(groupsTextField),
 });
 
 const buttonAuth = new Button({
@@ -133,10 +104,10 @@ const buttonAuth = new Button({
   name: "Авторизация",
   type: "button",
   page: "authorization",
-  click: () => changePage("/authorization"),
+  click: () => changePage("/"),
 });
 
-const registrationPage = new Registration({
+export const registrationPage = new Registration({
   groupsTextField,
   buttonRegistration,
   buttonAuth,

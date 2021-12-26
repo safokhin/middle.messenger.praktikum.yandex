@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { EventBus, IEventBus } from "./EventBus";
 
 type UnknownObject = { [key: string]: unknown };
-type PropsElement = { [key: string]: string | boolean };
+type PropsElement = { [key: string]: string };
 type EventsElement = { [key: string]: (event: MouseEvent) => void };
 
 interface IChildren {
@@ -56,7 +56,7 @@ export class Block {
   }
 
   private _componentDidMount() {
-    this.componentDidMount();
+    this.componentDidMount(this.props);
     this.eventBus().emit(Block.EVENTS.RENDER);
   }
 
@@ -69,14 +69,17 @@ export class Block {
   }
 
   private _componentDidUpdate(oldProps: unknown, newProps: unknown) {
-    const response: boolean = this.componentDidUpdate(oldProps, newProps);
-    if (response) this.eventBus().emit(Block.EVENTS.RENDER);
+    // TODO: Очень Очень плохо
+    const oldPropsString = JSON.stringify(oldProps);
+    const newPropsString = JSON.stringify(newProps);
+
+    if (oldPropsString !== newPropsString) {
+      this.componentDidUpdate(oldProps, newProps);
+      this.eventBus().emit(Block.EVENTS.RENDER);
+    }
   }
 
-  // @ts-ignore
-  componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-    return true;
-  }
+  componentDidUpdate(oldProps: unknown, newProps: unknown) {}
 
   private _render() {
     const block = this.render();
@@ -132,8 +135,10 @@ export class Block {
   }
 
   setProps = (nextProps: object): void => {
-    this.props = { ...this.props, ...nextProps };
-    this.eventBus().emit(Block.EVENTS.RENDER);
+    const oldProps = { ...this.props };
+    const newProps = { ...this.props, ...nextProps };
+    this.props = newProps;
+    this._componentDidUpdate(oldProps, newProps);
   };
 
   get element() {
