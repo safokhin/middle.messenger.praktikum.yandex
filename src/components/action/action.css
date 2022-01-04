@@ -9,7 +9,7 @@
   width: max-content;
   background: #fff;
 
-  & .button:not(:last-child) {
+  &__button:not(:last-child) {
     margin-bottom: 12px;
   }
 

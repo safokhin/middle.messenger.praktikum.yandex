@@ -1,6 +1,5 @@
 import iconClip from "../../static/icons/back.svg";
 import { changePage, createTmpl } from "./index";
-import Profile from "../components/profile";
 import Button from "../components/button";
 import Avatar from "../components/avatar";
 import TextField from "../components/textField";
@@ -10,6 +9,7 @@ import { handlerErrors } from "../util/validation";
 import { typeFormSettings } from "../util/typeFormSettings";
 import Popup from "../components/popup";
 import iconRemove from "../../static/icons/remove.svg";
+import Profile from "../components/profile";
 
 const buttonBack = new Button({
   classes: "icon",

@@ -18,7 +18,7 @@ class Store extends EventBus {
       return acc;
     }, {});
 
-    this.state = Object.assign(this.state, itemObj);
+    this.state = { ...this.state, ...itemObj };
     this.emit(StoreEvents.UPDATE);
   }
 }

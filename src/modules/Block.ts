@@ -1,6 +1,8 @@
 import * as Handlebars from "handlebars";
 import { nanoid } from "nanoid";
 import { EventBus, IEventBus } from "./EventBus";
+import isEqual from "../util/isEqual";
+import { chats } from "../api/chats";
 
 type UnknownObject = { [key: string]: unknown };
 type PropsElement = { [key: string]: string };
@@ -69,11 +71,7 @@ export class Block {
   }
 
   private _componentDidUpdate(oldProps: unknown, newProps: unknown) {
-    // TODO: Очень Очень плохо
-    const oldPropsString = JSON.stringify(oldProps);
-    const newPropsString = JSON.stringify(newProps);
-
-    if (oldPropsString !== newPropsString) {
+    if (!isEqual(oldProps, newProps)) {
       this.componentDidUpdate(oldProps, newProps);
       this.eventBus().emit(Block.EVENTS.RENDER);
     }
@@ -84,7 +82,7 @@ export class Block {
   private _render() {
     const block = this.render();
 
-    if (this._element !== null && block) {
+    if (this._element !== null) {
       this._element.innerHTML = "";
       this._element.append(block);
 
@@ -137,7 +135,10 @@ export class Block {
   setProps = (nextProps: object): void => {
     const oldProps = { ...this.props };
     const newProps = { ...this.props, ...nextProps };
-    this.props = newProps;
+    const { children, propsElement } = this._getChildren(newProps);
+
+    if (children) this.children = { ...this.children, ...children };
+    if (propsElement) this.props = { ...this.props, ...propsElement };
     this._componentDidUpdate(oldProps, newProps);
   };
 

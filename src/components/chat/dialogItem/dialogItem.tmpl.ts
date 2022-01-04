@@ -1,9 +1,8 @@
 import checkedIcon from "../../../../static/icons/checked.svg";
-import unCheckedIcon from "../../../../static/icons/un-checked.svg";
 
 //language=hbs
 export const dialogItem = `
-  <button class="dialog-item">
+  <button class="dialog-item {{ classes }}">
       <div class="dialog-item__avatar">
           {{{ dialogItemAvatar }}}
       </div>
@@ -18,7 +17,7 @@ export const dialogItem = `
                   {{#if checked}}
                       <img src='${checkedIcon}' alt="">
                     {{else}}
-                      <img src='${unCheckedIcon}' alt="">
+                      <span>{{ countUnchecked }}</span>
                   {{/if}}
               </span>
           </div>

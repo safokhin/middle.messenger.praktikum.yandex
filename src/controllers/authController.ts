@@ -1,10 +1,14 @@
-import { getUser, logOut, signIn, signUp } from "../api/auth";
+import { auth } from "../api/auth";
 import { changePage } from "../pages";
 import { authorizationPage, createTmplAuth } from "../pages/authoziration";
 import { checkAllFieldsErrors } from "../util/validation";
 import { createTmplReg, registrationPage } from "../pages/registration";
 import { store } from "../modules/Store";
 import { router } from "../service/Router";
+import { createTemplateChat } from "../pages/chat";
+import { createTmplProfile } from "../pages/profile";
+import { createTmpl404 } from "../pages/404";
+import { createTmpl500 } from "../pages/500";
 
 export class AuthController {
   public signUpUser(data: any[]): void {
@@ -31,7 +35,8 @@ export class AuthController {
         "Content-type": "application/json; charset=utf-8",
       };
 
-      signUp({ data: validation.fields, headers })
+      auth
+        .signUp({ data: validation.fields, headers })
         .then((data: { status: number }) => {
           if (data.status === 200) this.getUser();
         })
@@ -60,7 +65,8 @@ export class AuthController {
         "Access-Control-Allow-Credentials": true,
         "Content-type": "application/json; charset=utf-8",
       };
-      signIn({ data: validation.fields, headers })
+      auth
+        .signIn({ data: validation.fields, headers })
         .then((data: { status: number }) => {
           if (data.status === 200) this.getUser();
         })
@@ -85,16 +91,17 @@ export class AuthController {
     }
   }
 
-  public getUser(): any {
+  public async getUser(): any {
     const pathName = window.location.pathname;
-
-    return getUser({
-      data: {},
-      headers: { "Content-type": "application/json; charset=utf-8" },
-    })
+    const headers = { "Content-type": "application/json; charset=utf-8" };
+    return await auth
+      .getUser({
+        data: {},
+        headers,
+      })
       .then((data: { response: string }) => {
-        const dataObj = JSON.parse(data.response);
-        store.set("user", dataObj);
+        const user = JSON.parse(data.response);
+        store.set("user", user);
         // Чтобы страница не рендерилась лишний раз
         if (pathName === "/" || pathName === "/sign-up") {
           changePage("/messenger");
@@ -117,7 +124,8 @@ export class AuthController {
       "Access-Control-Allow-Credentials": true,
       "Content-type": "application/json; charset=utf-8",
     };
-    logOut({ data: {}, headers })
+    auth
+      .logOut({ data: {}, headers })
       .then((data: { status: number }) => {
         if (data.status === 200) {
           changePage("/");

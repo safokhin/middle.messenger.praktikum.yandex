@@ -44,7 +44,8 @@
     }
   }
 
-  &:hover {
+  &:hover,
+  &.active {
     background: rgba(228, 237, 253, 0.5);
   }
 }

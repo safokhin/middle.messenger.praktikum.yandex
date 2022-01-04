@@ -9,9 +9,10 @@ export const sidebarTmpl = `
         </div>
         <div class="chat__sidebar-row chat__sidebar-search">
             <input type="text" class="search" placeholder="Поиск">
+            {{{ createChatButton }}}
         </div>
         <div class="chat__sidebar-messages chat__sidebar-row">
-            {{{ messages }}}
+            {{{ dialogItems }}}
         </div>
     </div>
 `;

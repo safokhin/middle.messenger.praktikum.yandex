@@ -5,8 +5,7 @@ export const dialogTmpl = `
             <span class="chat__content--empty">Выберите чат для отправки сообщения</span>
         {{else}}
         <div class="chat__header">
-            <span class="chat__header-name">Петров Алексей</span>
-            <span class="chat__header-status">Онлайн</span>
+            <span class="chat__header-name">{{ title }}</span>
             <span class="chat__header-more">
                 {{{ buttonMore }}}
                 {{{ actionMore }}}

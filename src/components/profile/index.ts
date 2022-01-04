@@ -1,25 +1,22 @@
 import { Block } from "../../modules/Block";
 import { profileTmpl } from "./profile.template";
-import { store, StoreEvents } from "../../modules/Store";
 import { firstCharacters } from "../../util/firstCharacters";
-import { authController } from "../../controllers/authController";
+import { connect } from "../../service/connectStore";
 
-export default class Profile extends Block {
+class Profile extends Block {
   constructor(props: Record<string, any>) {
     super("div", props);
     this.props = props;
-
-    authController.getUser();
-    store.on(StoreEvents.UPDATE, () => this.setProps(store.getState()));
   }
 
-  componentDidUpdate(_: unknown, newProps: unknown) {
+  componentDidUpdate(oldProps: unknown, newProps: unknown) {
     const { user, avatarUser, infoPersons } = newProps;
-    const [login, firstName, secondName, displayName, phone, email] =
-      infoPersons;
-    const isEmptyPhoto = user.avatar === null;
 
-    if (user) {
+    if (!!user && !!infoPersons) {
+      const [login, firstName, secondName, displayName, phone, email] =
+        infoPersons;
+
+      const isEmptyPhoto = user.avatar === null;
       this.setProps({ fullname: `${user.second_name} ${user.first_name}` });
       avatarUser.setProps({
         nameSymbol: firstCharacters(`${user.second_name} ${user.first_name}`),
@@ -39,3 +36,6 @@ export default class Profile extends Block {
     return this.compile(profileTmpl, this.props);
   }
 }
+
+const withUser = connect((state) => ({ user: state.user }));
+export default withUser(Profile);

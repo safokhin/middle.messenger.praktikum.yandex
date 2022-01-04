@@ -7,5 +7,6 @@ export const chatTmpl = `
       </div>
       {{#if popupAdd}} {{{ popupAdd }}} {{/if}}
       {{#if popupRemove}} {{{ popupRemove }}} {{/if}}
+      {{#if popupCreateChat}} {{{ popupCreateChat }}} {{/if}}
   </div>
 `;

@@ -1,9 +1,5 @@
 import { checkAllFieldsErrors } from "../util/validation";
-import {
-  changePassword,
-  changeProfile,
-  changeProfileAvatar,
-} from "../api/users";
+import { users } from "../api/users";
 import { authController } from "./authController";
 
 class UsersController {
@@ -15,17 +11,18 @@ class UsersController {
         "Access-Control-Allow-Credentials": true,
         "Content-type": "application/json; charset=utf-8",
       };
-      changeProfile({ data: validation.fields, headers })
+      users
+        .changeProfile({ data: validation.fields, headers })
         .then((data: { status: number }) => {
           if (data.status === 200) {
             authController.getUser();
           }
         })
-        .catch((err) => {});
+        .catch(() => {});
     }
   }
 
-  changeProfileAvatar(data: any) {
+  changeProfileAvatar() {
     const headers = {};
     const form = document.querySelector("#form-avatar");
     const avatar = document.querySelector("#field-photo");
@@ -34,13 +31,14 @@ class UsersController {
       const formData = new FormData(form);
       formData.append("avatar", avatar.files[0]);
 
-      changeProfileAvatar({ data: formData, headers })
+      users
+        .changeProfileAvatar({ data: formData, headers })
         .then((data: { status: number }) => {
           if (data.status === 200) {
             authController.getUser();
           }
         })
-        .catch((err) => {});
+        .catch(() => {});
     }
   }
 
@@ -52,12 +50,17 @@ class UsersController {
         "Access-Control-Allow-Credentials": true,
         "Content-type": "application/json; charset=utf-8",
       };
-      changePassword({ data: validation.fields, headers })
-        .then((data: { status: number }) => {
+      users
+        .changePassword({ data: validation.fields, headers })
+        .then(() => {
           console.log("Ok");
         })
-        .catch((err) => {});
+        .catch(() => {});
     }
+  }
+
+  getUser(id: number) {
+    console.log(id);
   }
 }
 

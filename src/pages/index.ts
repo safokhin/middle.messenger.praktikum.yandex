@@ -1,12 +1,13 @@
+import "regenerator-runtime/runtime";
+import { router } from "../service/Router";
+import { authController } from "../controllers/authController";
+import { store } from "../modules/Store";
 import { createTmplAuth } from "./authoziration";
 import { createTmplReg } from "./registration";
 import { createTemplateChat } from "./chat";
 import { createTmplProfile } from "./profile";
 import { createTmpl404 } from "./404";
 import { createTmpl500 } from "./500";
-import { Router } from "../service/Router";
-
-const router = new Router();
 
 router
   .use("/", createTmplAuth)
@@ -28,3 +29,7 @@ export const createTmpl = (fragment: DocumentFragment): void => {
     root.appendChild(fragment);
   }
 };
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await authController.getUser();
+});
