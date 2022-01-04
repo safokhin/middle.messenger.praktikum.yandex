@@ -1,7 +1,6 @@
 import "regenerator-runtime/runtime";
 import { router } from "../service/Router";
 import { authController } from "../controllers/authController";
-import { store } from "../modules/Store";
 import { createTmplAuth } from "./authoziration";
 import { createTmplReg } from "./registration";
 import { createTemplateChat } from "./chat";

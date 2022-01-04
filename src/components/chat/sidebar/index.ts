@@ -17,7 +17,7 @@ class Sidebar extends Block {
     this.props = props;
   }
 
-  componentDidMount(oldProps?: unknown): unknown {
+  componentDidMount(oldProps?: unknown): void {
     this.setProps({ createChatButton: createChatButton() });
   }
 

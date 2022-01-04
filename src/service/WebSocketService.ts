@@ -1,10 +1,9 @@
 import { store } from "../modules/Store";
-import { dialogData } from "../pages/chat";
-import cloneDeep from "../util/deepClone";
 import deepClone from "../util/deepClone";
+import { ChatI, MessagesI } from "../types/apiAndControllers";
 
 export class WebSocketService {
-  public openSocket(userId: string, chatId: string, token: string) {
+  public openSocket(userId: number, chatId: number, token: string) {
     const ws = new WebSocket(
       `wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`
     );
@@ -21,10 +20,10 @@ export class WebSocketService {
     });
 
     ws.addEventListener("message", ({ data }) => {
-      const messages = JSON.parse(data);
+      const messages: MessagesI = JSON.parse(data);
       if (messages.type !== "user connected") {
         const state = store.getState();
-        const chatsStore = deepClone(state.chats);
+        const chatsStore: ChatI[] = deepClone(state.chats);
 
         if (Array.isArray(messages)) {
           chatsStore.forEach((chat) => {

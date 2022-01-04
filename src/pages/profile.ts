@@ -181,9 +181,9 @@ const changeAvatarPopup = new Popup({
   button: new Button({
     type: "submit",
     name: "Применить",
-    click: (event) => {
+    click: (event: Event) => {
       event.preventDefault();
-      usersController.changeProfileAvatar(textFieldPhoto);
+      usersController.changeProfileAvatar();
     },
   }),
 });

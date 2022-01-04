@@ -1,20 +1,21 @@
 import HTTPTransport from "../service/HTTPTransport";
-const baseUrl = "https://ya-praktikum.tech/api/v2";
+import { Api } from "../types/apiAndControllers";
+import { baseUrl } from "../constant";
 
-export const auth = {
-  signUp: (options: object): Promise<object> => {
+export const auth: Api = {
+  signUp: (options) => {
     return HTTPTransport.post(`${baseUrl}/auth/signup`, options);
   },
 
-  signIn: (options: object): Promise<object> => {
+  signIn: (options) => {
     return HTTPTransport.post(`${baseUrl}/auth/signin`, options);
   },
 
-  logOut: (options: object): Promise<object> => {
+  logOut: (options) => {
     return HTTPTransport.post(`${baseUrl}/auth/logout`, options);
   },
 
-  getUser: (options: object): Promise<object> => {
+  getUser: (options) => {
     return HTTPTransport.get(`${baseUrl}/auth/user`, options);
   },
 };

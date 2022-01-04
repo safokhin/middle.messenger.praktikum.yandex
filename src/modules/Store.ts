@@ -1,13 +1,20 @@
 import { EventBus } from "./EventBus";
+import { ChatI, UserI } from "../types/apiAndControllers";
 
 export enum StoreEvents {
   UPDATE = "updated",
 }
 
-class Store extends EventBus {
-  private state: { [key: string]: string } = {};
+type StateI = {
+  chats?: ChatI[];
+  user?: UserI;
+  currentChatId?: number;
+};
 
-  public getState() {
+class Store extends EventBus {
+  private state: StateI = {};
+
+  public getState(): StateI {
     return this.state;
   }
 

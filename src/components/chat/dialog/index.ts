@@ -3,7 +3,6 @@ import { dialogTmpl } from "./dialog.tmpl";
 import { connect } from "../../../service/connectStore";
 import Button from "../../button";
 import iconClip from "../../../../static/icons/clip.svg";
-import { actionClip, actionMore } from "../../../pages/chat";
 import iconMore from "../../../../static/icons/more.svg";
 import Input from "../../input";
 import Message from "../../message";
@@ -98,6 +97,9 @@ const actionMore = new Action({
       containerClass: "action__button",
       click: () => {
         popupAdd.setProps({ classes: "" });
+        actionMore.setProps({
+          classes: "action--left action--bottom invisible",
+        });
       },
     }),
     new Button({
@@ -108,6 +110,9 @@ const actionMore = new Action({
       containerClass: "action__button",
       click: () => {
         popupRemove.setProps({ classes: "" });
+        actionMore.setProps({
+          classes: "action--left action--bottom invisible",
+        });
       },
     }),
   ],
@@ -163,15 +168,19 @@ const inputMessage = new Input({
 // Сообщения, текущий пользователь, все пользователи чата
 const createMessages = (message, user, users) => {
   const messageUser = users.find((user) => user.id === message.user_id);
+  const avatar = {
+    nameSymbol: "I",
+    isEmptyPhoto: !messageUser || (messageUser && messageUser.avatar === null),
+    classes: "small",
+  };
+
+  if (messageUser && messageUser.avatar)
+    avatar.srcImage = `https://ya-praktikum.tech/api/v2/resources${messageUser.avatar}`;
 
   return new Message({
     text: message.content,
     isMe: message.user_id === user.id,
-    avatar: new Avatar({
-      isEmptyPhoto: messageUser.avatar === null,
-      srcImage: `https://ya-praktikum.tech/api/v2/resources${messageUser.avatar}`,
-      classes: "small",
-    }),
+    avatar: new Avatar({ ...avatar }),
     containerClass: "message__row",
   });
 };
@@ -180,7 +189,8 @@ const buttonSend = new Button({
   classes: "button icon button_icon-message button--invisible",
   icon: iconSend,
   type: "button",
-  click: () => {
+  click: (event) => {
+    event.preventDefault();
     const state = store.getState();
     const content = inputMessage.props.value;
     const socket = state.sockets[state.currentChatId];

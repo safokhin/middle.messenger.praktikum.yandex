@@ -1,13 +1,13 @@
 import HTTPTransport from "../service/HTTPTransport";
+import { Api } from "../types/apiAndControllers";
+import { baseUrl } from "../constant";
 
-const baseUrl = "https://ya-praktikum.tech/api/v2";
-
-export const chats = {
+export const chats: Api = {
   getAll: (options) => {
     return HTTPTransport.get(`${baseUrl}/chats`, options);
   },
 
-  getNewMessage: (options, id: number) => {
+  getNewMessage: (options, id) => {
     return HTTPTransport.get(`${baseUrl}/chats/new/${id}`, options);
   },
 
@@ -19,7 +19,7 @@ export const chats = {
     return HTTPTransport.post(`${baseUrl}/chats`, options);
   },
 
-  setToken: (options, id: number) => {
+  setToken: (options, id) => {
     return HTTPTransport.post(`${baseUrl}/chats/token/${id}`, options);
   },
 

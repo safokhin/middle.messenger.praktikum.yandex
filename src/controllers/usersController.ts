@@ -24,8 +24,9 @@ class UsersController {
 
   changeProfileAvatar() {
     const headers = {};
-    const form = document.querySelector("#form-avatar");
-    const avatar = document.querySelector("#field-photo");
+    const form: HTMLFormElement | null = document.querySelector("#form-avatar");
+    const avatar: HTMLFormElement | null =
+      document.querySelector("#field-photo");
 
     if (form !== null && avatar !== null) {
       const formData = new FormData(form);
@@ -35,7 +36,7 @@ class UsersController {
         .changeProfileAvatar({ data: formData, headers })
         .then((data: { status: number }) => {
           if (data.status === 200) {
-            authController.getUser();
+            authController.getUser().then(() => console.log("Аватар изменен"));
           }
         })
         .catch(() => {});

@@ -27,7 +27,7 @@ export class Router {
     let pathname = window.location.pathname;
 
     const filterRoute = this.routes.filter(
-      (route) => route._pathname === pathname
+      (route: { _pathname: string }) => route._pathname === pathname
     );
 
     if (filterRoute.length === 0) pathname = "/404";

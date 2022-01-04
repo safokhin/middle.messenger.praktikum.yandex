@@ -5,13 +5,11 @@ import { checkAllFieldsErrors } from "../util/validation";
 import { createTmplReg, registrationPage } from "../pages/registration";
 import { store } from "../modules/Store";
 import { router } from "../service/Router";
-import { createTemplateChat } from "../pages/chat";
-import { createTmplProfile } from "../pages/profile";
-import { createTmpl404 } from "../pages/404";
-import { createTmpl500 } from "../pages/500";
+import { Block } from "../modules/Block";
 
 export class AuthController {
-  public signUpUser(data: any[]): void {
+  public signUpUser(data: Block[]): void {
+    console.log(data);
     const validation = checkAllFieldsErrors(data);
     const passwords = data.filter(
       (element) =>
@@ -52,12 +50,11 @@ export class AuthController {
           registrationPage.setProps({
             error: errorText,
           });
-          createTmplReg(); // Необходимо для отображения текста ошибки
         });
     }
   }
 
-  public signInUser(data: any[]): void {
+  public signInUser(data: Block[]): void {
     const validation = checkAllFieldsErrors(data);
 
     if (validation.check) {
@@ -91,7 +88,7 @@ export class AuthController {
     }
   }
 
-  public async getUser(): any {
+  public async getUser(): Promise<void> {
     const pathName = window.location.pathname;
     const headers = { "Content-type": "application/json; charset=utf-8" };
     return await auth

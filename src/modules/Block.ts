@@ -2,7 +2,6 @@ import * as Handlebars from "handlebars";
 import { nanoid } from "nanoid";
 import { EventBus, IEventBus } from "./EventBus";
 import isEqual from "../util/isEqual";
-import { chats } from "../api/chats";
 
 type UnknownObject = { [key: string]: unknown };
 type PropsElement = { [key: string]: string };
