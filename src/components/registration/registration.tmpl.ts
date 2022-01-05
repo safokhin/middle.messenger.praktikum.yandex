@@ -1,7 +1,7 @@
 //language=hbs
 export const registrationTmpl = `
 <div class="page-registration page-container">
-    <form class="popup" method="post">
+    <form class="popup" method="post" onsubmit="return false">
         <div class="popup__header">
             <span class="popup__header-title">Регистрация</span>
             <span class="popup__header-subtitle">Для входа в чат, вам необходимо зарегистрироваться</span>

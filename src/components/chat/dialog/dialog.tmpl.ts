@@ -14,7 +14,7 @@ export const dialogTmpl = `
         <div class="chat__messages">
             {{{ messages }}}
         </div>
-        <form class="chat__input" method="post">
+        <form class="chat__input" method="post" onsubmit="return false">
             <span class="chat__input-clip">
                 {{{ buttonClip }}}
                 {{{ actionClip }}}

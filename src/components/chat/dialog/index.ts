@@ -16,6 +16,7 @@ import iconPlus from "../../../../static/icons/plus.svg";
 import iconRemove from "../../../../static/icons/remove.svg";
 import { popupAdd, popupRemove } from "../index";
 import { store } from "../../../modules/Store";
+import { firstCharacters } from "../../../util/firstCharacters";
 
 class Dialog extends Block {
   constructor(props: Record<string, any>) {
@@ -173,6 +174,12 @@ const createMessages = (message, user, users) => {
     isEmptyPhoto: !messageUser || (messageUser && messageUser.avatar === null),
     classes: "small",
   };
+
+  if (messageUser) {
+    avatar.nameSymbol = firstCharacters(
+      `${messageUser.second_name} ${messageUser.first_name}`
+    );
+  }
 
   if (messageUser && messageUser.avatar)
     avatar.srcImage = `https://ya-praktikum.tech/api/v2/resources${messageUser.avatar}`;

@@ -1,7 +1,7 @@
 //language=hbs
 export const authorizationTmpl = `
 <div class="page-authorization page-container">
-    <form class="popup" method="post">
+    <form class="popup" method="post" onsubmit="return false">
         <div class="popup__header">
             <span class="popup__header-title">Войти в аккаунт</span>
             <span class="popup__header-subtitle">Пожалуйста, войдите в аккаунт</span>

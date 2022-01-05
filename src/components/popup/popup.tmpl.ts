@@ -1,6 +1,6 @@
 //language=hbs
 export const popupTmpl = `
-    <form class="popup-outside {{ classes }}" id="{{ id }}">
+    <form class="popup-outside {{ classes }}" id="{{ id }}" onsubmit="return false">
         <div class="popup">
             <div class="popup__header">
                 <span class="popup__header-title">{{ title }}</span>
