@@ -14,11 +14,6 @@
     "linter": "eslint .",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\"}' mocha --require ts-node/register --require jsdom-global/register src/**/*.spec.ts"
   },
-  "staticFiles": {
-    "staticPath": [
-      "./_redirects"
-    ]
-  },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.1",
     "@types/chai": "^4.3.0",
