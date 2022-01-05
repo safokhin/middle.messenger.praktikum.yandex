@@ -9,7 +9,6 @@ import { Block } from "../modules/Block";
 
 export class AuthController {
   public signUpUser(data: Block[]): void {
-    console.log(data);
     const validation = checkAllFieldsErrors(data);
     const passwords = data.filter(
       (element) =>

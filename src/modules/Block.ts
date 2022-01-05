@@ -1,7 +1,7 @@
 import * as Handlebars from "handlebars";
 import { nanoid } from "nanoid";
 import { EventBus, IEventBus } from "./EventBus";
-import isEqual from "../util/isEqual";
+import isEqual, { PlainObject } from "../util/isEqual";
 
 type UnknownObject = { [key: string]: unknown };
 type PropsElement = { [key: string]: string };
@@ -44,58 +44,16 @@ export class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  private _registerEvents(eventBus: IEventBus) {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-    eventBus.on(Block.EVENTS.CDM, this._componentDidMount.bind(this));
-    eventBus.on(Block.EVENTS.CDU, this._componentDidUpdate.bind(this));
-    eventBus.on(Block.EVENTS.RENDER, this._render.bind(this));
-  }
-
-  private init() {
-    this._createResources();
-    this.eventBus().emit(Block.EVENTS.CDM);
-  }
-
-  private _componentDidMount() {
-    this.componentDidMount(this.props);
-    this.eventBus().emit(Block.EVENTS.RENDER);
-  }
-
-  componentDidMount(oldProps?: unknown) {
+  public componentDidMount(oldProps?: unknown) {
     return oldProps;
   }
 
-  dispatchComponentDidMount() {
-    this.eventBus().emit(Block.EVENTS.CDM);
-  }
+  // @ts-ignore
+  public componentDidUpdate(oldProps?: unknown, newProps?: unknown) {}
 
-  private _componentDidUpdate(oldProps: unknown, newProps: unknown) {
-    if (!isEqual(oldProps, newProps)) {
-      this.componentDidUpdate(oldProps, newProps);
-      this.eventBus().emit(Block.EVENTS.RENDER);
-    }
-  }
+  public render(): DocumentFragment | void {}
 
-  componentDidUpdate(oldProps: unknown, newProps: unknown) {}
-
-  private _render() {
-    const block = this.render();
-
-    if (this._element !== null) {
-      this._element.innerHTML = "";
-      this._element.append(block);
-
-      this._addEvents();
-    }
-  }
-
-  render(): DocumentFragment | void {}
-
-  private _createResources() {
-    this._element = this._createDocumentElement(this.tagName);
-  }
-
-  compile(template: string, props: UnknownObject) {
+  public compile(template: string, props: UnknownObject) {
     const fragment = this._createDocumentElement("template");
     const propsAndStubs = { ...props };
 
@@ -112,6 +70,7 @@ export class Block {
 
     Object.values(this.children).forEach((child: any) => {
       if (Array.isArray(child)) {
+        // @ts-ignore
         const stub = fragment.content.querySelector(
           `[data-id="${child[0].__key}"]`
         );
@@ -123,17 +82,19 @@ export class Block {
           if (stub !== null) stub.appendChild(container);
         });
       } else {
+        // @ts-ignore
         const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
         if (stub !== null) stub.replaceWith(child.getContent());
       }
     });
-
+    // @ts-ignore
     return fragment.content;
   }
 
-  setProps = (nextProps: object): void => {
+  public setProps = (nextProps: object): void => {
     const oldProps = { ...this.props };
     const newProps = { ...this.props, ...nextProps };
+    // @ts-ignore
     const { children, propsElement } = this._getChildren(newProps);
 
     if (children) this.children = { ...this.children, ...children };
@@ -141,7 +102,7 @@ export class Block {
     this._componentDidUpdate(oldProps, newProps);
   };
 
-  get element() {
+  private get element() {
     return this._element;
   }
 
@@ -149,8 +110,40 @@ export class Block {
     return this.element;
   }
 
-  _createDocumentElement(tagName: string): HTMLElement {
+  private _render() {
+    const block = this.render();
+
+    if (this._element !== null && block) {
+      this._element.innerHTML = "";
+      this._element.append(block);
+
+      this._addEvents();
+    }
+  }
+
+  private _createResources() {
+    this._element = this._createDocumentElement(this.tagName);
+  }
+
+  private _createDocumentElement(tagName: string): HTMLElement {
     return document.createElement(tagName);
+  }
+
+  private init() {
+    this._createResources();
+    this.eventBus().emit(Block.EVENTS.CDM);
+  }
+
+  private _componentDidMount() {
+    this.componentDidMount(this.props);
+    this.eventBus().emit(Block.EVENTS.RENDER);
+  }
+
+  private _componentDidUpdate(oldProps: PlainObject, newProps: PlainObject) {
+    if (!isEqual(oldProps, newProps)) {
+      this.componentDidUpdate(oldProps, newProps);
+      this.eventBus().emit(Block.EVENTS.RENDER);
+    }
   }
 
   private _getChildren(propsAndChildren: {
@@ -177,7 +170,14 @@ export class Block {
     return { children, propsElement, eventsElement };
   }
 
-  _addEvents(): void {
+  private _registerEvents(eventBus: IEventBus) {
+    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.CDM, this._componentDidMount.bind(this));
+    eventBus.on(Block.EVENTS.CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.RENDER, this._render.bind(this));
+  }
+
+  private _addEvents(): void {
     const eventElements: string[] = ["input", "button"];
     Object.keys(this.eventsElement).forEach((eventName) => {
       let eventElement: Element | undefined | null;

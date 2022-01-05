@@ -10,7 +10,9 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "esModuleInterop": true,
     "typeRoots": ["./src/@types", "./node_modules/@types"],
-    "rootDir": "src"
+    "rootDir": "src",
+    "types": ["node"]
   }
 }

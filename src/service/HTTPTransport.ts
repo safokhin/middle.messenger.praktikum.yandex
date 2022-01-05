@@ -20,23 +20,23 @@ function queryStringify(data: object) {
 }
 
 export class HTTPTransport {
-  get: requestProps = (url, options) => {
+  public get: requestProps = (url, options) => {
     return this.request(url, { ...options, method: METHODS.GET });
   };
 
-  post: requestProps = (url, options = {}) => {
+  public post: requestProps = (url, options = {}) => {
     return this.request(url, { ...options, method: METHODS.POST });
   };
 
-  put: requestProps = (url, options) => {
+  public put: requestProps = (url, options) => {
     return this.request(url, { ...options, method: METHODS.PUT });
   };
 
-  delete: requestProps = (url, options) => {
+  public delete: requestProps = (url, options) => {
     return this.request(url, { ...options, method: METHODS.DELETE });
   };
 
-  request = (
+  private request = (
     url: string,
     options: {
       data?: any;

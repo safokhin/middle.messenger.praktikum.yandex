@@ -17,13 +17,13 @@ export class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, view: () => void) {
+  public use(pathname: string, view: () => void) {
     const route = new Route(pathname, view, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;
   }
 
-  start() {
+  public start() {
     let pathname = window.location.pathname;
 
     const filterRoute = this.routes.filter(
@@ -39,12 +39,12 @@ export class Router {
     this._onRoute(pathname);
   }
 
-  go(pathname: string) {
-    this.history.pushState({}, "", pathname);
+  public go(pathname: string) {
+    window.history.pushState({}, "", pathname);
     this._onRoute(pathname);
   }
 
-  _onRoute(pathname: string) {
+  private _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
 
     if (!route) return;
@@ -53,7 +53,7 @@ export class Router {
     route.render(route);
   }
 
-  getRoute(pathname: string) {
+  private getRoute(pathname: string) {
     return this.routes.find(
       (item: { _pathname: string }) => item._pathname === pathname
     );
