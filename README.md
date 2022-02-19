@@ -17,9 +17,9 @@ https://infallible-bhaskara-6379cb.netlify.app/
 
 https://safohin.herokuapp.com
 
-## Ссылка на pull request sprint_3
+## Ссылка на pull request sprint_4
 
-https://github.com/safokhin/middle.messenger.praktikum.yandex/pull/5
+https://github.com/safokhin/middle.messenger.praktikum.yandex/pull/6
 
 ## Описание структуры
 
