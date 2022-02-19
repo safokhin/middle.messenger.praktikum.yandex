@@ -7,7 +7,7 @@ export const auth: Api = {
   },
 
   signIn: (options) => {
-    return HTTPTransport.post(`$auth/signin`, options);
+    return HTTPTransport.post(`auth/signin`, options);
   },
 
   logOut: (options) => {

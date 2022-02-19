@@ -1,5 +1,5 @@
 FROM node:14.17.0
-WORKDIR /var/www
+WORKDIR /app
 COPY package*.json ./
 
 RUN yarn install
