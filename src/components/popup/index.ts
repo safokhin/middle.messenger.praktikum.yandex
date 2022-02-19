@@ -7,7 +7,7 @@ export default class Popup extends Block {
     this.props = props;
   }
 
-  componentDidMount(oldProps?: unknown): void {
+  componentDidMount(_?: unknown): void {
     this._element?.addEventListener("click", (event) => {
       const isClose = handleOutsideClick(event);
       if (isClose) this.setProps({ classes: "invisible" });
@@ -19,7 +19,8 @@ export default class Popup extends Block {
   }
 }
 
-const handleOutsideClick = (event) => {
+const handleOutsideClick = (event: Event) => {
+  // @ts-ignore
   const path = event.path || (event.composedPath && event.composedPath());
 
   const indexPopup = path.findIndex((node: HTMLElement) =>

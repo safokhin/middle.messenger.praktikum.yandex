@@ -21,9 +21,10 @@ export interface UserI {
 export interface MessagesI {
   id: string;
   time: string;
-  user_id: string;
+  user_id: string | number;
   content: string;
   type: string;
+  user?: UserI;
   file: {
     id: number;
     user_id: number;
@@ -40,11 +41,7 @@ export interface ChatI {
   title: string;
   avatar: string;
   unread_count: number;
-  last_message: {
-    user: UserI;
-    time: string;
-    content: string;
-  };
+  last_message: MessagesI;
   users?: UserI[];
   token: string;
   messages?: MessagesI;

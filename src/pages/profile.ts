@@ -1,4 +1,4 @@
-import iconClip from "../../static/icons/back.svg";
+import iconClip from "../assets/icons/back.svg";
 import { changePage, createTmpl } from "./index";
 import Button from "../components/button";
 import Avatar from "../components/avatar";
@@ -8,7 +8,7 @@ import { usersController } from "../controllers/usersController";
 import { handlerErrors } from "../util/validation";
 import { typeFormSettings } from "../util/typeFormSettings";
 import Popup from "../components/popup";
-import iconRemove from "../../static/icons/remove.svg";
+import iconRemove from "../assets/icons/remove.svg";
 import Profile from "../components/profile";
 
 const buttonBack = new Button({

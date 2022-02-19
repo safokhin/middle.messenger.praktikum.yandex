@@ -9,7 +9,8 @@ class Profile extends Block {
     this.props = props;
   }
 
-  componentDidUpdate(oldProps: unknown, newProps: unknown) {
+  componentDidUpdate(_: unknown, newProps: unknown) {
+    // @ts-ignore
     const { user, avatarUser, infoPersons } = newProps;
 
     if (!!user && !!infoPersons) {
@@ -38,4 +39,5 @@ class Profile extends Block {
 }
 
 const withUser = connect((state) => ({ user: state.user }));
+// @ts-ignore
 export default withUser(Profile);

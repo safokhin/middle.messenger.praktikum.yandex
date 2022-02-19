@@ -5,11 +5,12 @@ import { firstCharacters } from "../../../util/firstCharacters";
 import Avatar from "../../avatar";
 import Button from "../../button";
 import { changePage } from "../../../pages";
-import iconPlus from "../../../../static/icons/plus.svg";
+import iconPlus from "../../../assets/icons/plus.svg";
 import { chatController } from "../../../controllers/chatController";
 import DialogItem from "../dialogItem";
 import { convertData } from "../../../util/convertData";
 import { popupCreateChat } from "../index";
+import { ChatI, UserI } from "../../../types/apiAndControllers";
 
 class Sidebar extends Block {
   constructor(props: Record<string, any>) {
@@ -17,11 +18,21 @@ class Sidebar extends Block {
     this.props = props;
   }
 
-  componentDidMount(oldProps?: unknown): void {
+  componentDidMount(_?: unknown): void {
     this.setProps({ createChatButton: createChatButton() });
   }
 
-  async componentDidUpdate(oldProps: unknown, newProps: unknown) {
+  async componentDidUpdate(
+    oldProps: unknown,
+    newProps: {
+      user: UserI;
+      profileAvatar: string;
+      profileButton: string;
+      chats: ChatI[];
+      dialogItems: DialogItem[];
+      currentChatId: number;
+    }
+  ) {
     const {
       user,
       profileAvatar,
@@ -31,11 +42,12 @@ class Sidebar extends Block {
       currentChatId,
     } = newProps;
 
+    // @ts-ignore
     if (oldProps.user !== newProps.user && !chats) chatController.getAll();
 
     if (!!user && !profileAvatar && !profileButton && chats && !dialogItems) {
       const dialogItems = await Promise.all(
-        chats.map((chat) => {
+        chats.map((chat: ChatI) => {
           return createDialogItem(chat, currentChatId).then((data) => data);
         })
       );
@@ -54,7 +66,7 @@ class Sidebar extends Block {
   }
 }
 
-const createProfileAvatar = (user) => {
+const createProfileAvatar = (user: UserI) => {
   return new Avatar({
     classes: "small",
     nameSymbol: firstCharacters(`${user.second_name} ${user.first_name}`),
@@ -63,7 +75,7 @@ const createProfileAvatar = (user) => {
   });
 };
 
-const createProfileButton = (user) => {
+const createProfileButton = (user: UserI) => {
   return new Button({
     classes: "link",
     type: "button",
@@ -83,7 +95,7 @@ const createChatButton = () => {
   });
 };
 
-const createDialogItem = async (chat, currentChatId: number) => {
+const createDialogItem = async (chat: ChatI, currentChatId: number) => {
   const lastMessage = chat.last_message;
   // const newMessages = await chatController.getNewMessage(chat.id);
 
@@ -111,4 +123,5 @@ const withUser = connect((state) => ({
   chats: state.chats,
   currentChatId: state.currentChatId,
 }));
+// @ts-ignore
 export default withUser(Sidebar);

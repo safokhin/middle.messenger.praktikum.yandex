@@ -5,7 +5,6 @@ import { users } from "../api/users";
 import { ChatI, UserI } from "../types/apiAndControllers";
 
 export class ChatController {
-  // Если нет чатов, то ошибка
   public getAll(): void {
     const state = store.getState();
     let user = state.user;

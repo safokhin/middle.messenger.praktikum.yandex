@@ -5,7 +5,7 @@ export enum StoreEvents {
   UPDATE = "updated",
 }
 
-type StateI = {
+export type StateI = {
   chats?: ChatI[];
   user?: UserI;
   currentChatId?: number;

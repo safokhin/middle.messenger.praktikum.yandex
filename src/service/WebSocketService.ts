@@ -23,6 +23,7 @@ export class WebSocketService {
       const messages: MessagesI = JSON.parse(data);
       if (messages.type !== "user connected") {
         const state = store.getState();
+        // @ts-ignore
         const chatsStore: ChatI[] = deepClone(state.chats);
 
         if (Array.isArray(messages)) {
@@ -33,8 +34,9 @@ export class WebSocketService {
             return chat;
           });
         } else {
-          chatsStore.forEach((chat) => {
+          chatsStore.forEach((chat: ChatI) => {
             if (chat.id === chatId) {
+              // @ts-ignore
               chat.messages = [messages, ...chat.messages];
               chat.last_message = messages;
             }

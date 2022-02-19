@@ -1,3 +1,5 @@
+import { baseUrl } from "../constant";
+
 const METHODS = {
   GET: "GET",
   POST: "POST",
@@ -57,7 +59,12 @@ export class HTTPTransport {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
 
-      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+      xhr.open(
+        method,
+        isGet && !!data
+          ? `${baseUrl}/${url}${queryStringify(data)}`
+          : `${baseUrl}/${url}`
+      );
 
       xhr.withCredentials = true;
       Object.keys(headers).forEach((key) => {

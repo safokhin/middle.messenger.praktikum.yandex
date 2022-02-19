@@ -2,21 +2,22 @@ import { Block } from "../../../modules/Block";
 import { dialogTmpl } from "./dialog.tmpl";
 import { connect } from "../../../service/connectStore";
 import Button from "../../button";
-import iconClip from "../../../../static/icons/clip.svg";
-import iconMore from "../../../../static/icons/more.svg";
+import iconClip from "../../../assets/icons/clip.svg";
+import iconMore from "../../../assets/icons/more.svg";
 import Input from "../../input";
 import Message from "../../message";
 import Avatar from "../../avatar";
-import iconSend from "../../../../static/icons/send.svg";
+import iconSend from "../../../assets/icons/send.svg";
 import Action from "../../action";
-import iconPhoto from "../../../../static/icons/photo.svg";
-import iconFile from "../../../../static/icons/file.svg";
-import iconLocation from "../../../../static/icons/location.svg";
-import iconPlus from "../../../../static/icons/plus.svg";
-import iconRemove from "../../../../static/icons/remove.svg";
+import iconPhoto from "../../../assets/icons/photo.svg";
+import iconFile from "../../../assets/icons/file.svg";
+import iconLocation from "../../../assets/icons/location.svg";
+import iconPlus from "../../../assets/icons/plus.svg";
+import iconRemove from "../../../assets/icons/remove.svg";
 import { popupAdd, popupRemove } from "../index";
-import { store } from "../../../modules/Store";
+import { StateI, store } from "../../../modules/Store";
 import { firstCharacters } from "../../../util/firstCharacters";
+import { ChatI, MessagesI, UserI } from "../../../types/apiAndControllers";
 
 class Dialog extends Block {
   constructor(props: Record<string, any>) {
@@ -24,7 +25,7 @@ class Dialog extends Block {
     this.props = props;
   }
 
-  componentDidMount(oldProps?: unknown): unknown {
+  componentDidMount(_?: unknown) {
     this.setProps({
       buttonClip,
       buttonMore,
@@ -35,15 +36,18 @@ class Dialog extends Block {
     });
   }
 
-  componentDidUpdate(oldProps: unknown, newProps: unknown) {
+  componentDidUpdate(oldProps: StateI, newProps: StateI) {
     if (
       oldProps.currentChatId !== newProps.currentChatId ||
       (oldProps.chats !== newProps.chats && newProps.currentChatId)
     ) {
-      const { currentChatId, chats, user } = newProps;
+      // @ts-ignore
+      const { currentChatId, chats, user }: [] = newProps;
 
-      const currentChat = chats.find((chat) => chat.id === currentChatId);
-      const messages = currentChat.messages.map((message) =>
+      const currentChat = chats.find(
+        (chat: ChatI) => chat.id === currentChatId
+      );
+      const messages = currentChat.messages.map((message: MessagesI) =>
         createMessages(message, user, currentChat.users)
       );
 
@@ -167,8 +171,8 @@ const inputMessage = new Input({
 });
 
 // Сообщения, текущий пользователь, все пользователи чата
-const createMessages = (message, user, users) => {
-  const messageUser = users.find((user) => user.id === message.user_id);
+const createMessages = (message: MessagesI, user: UserI, users: UserI[]) => {
+  const messageUser = users.find((user: UserI) => user.id === message.user_id);
   const avatar = {
     nameSymbol: "I",
     isEmptyPhoto: !messageUser || (messageUser && messageUser.avatar === null),
@@ -181,8 +185,12 @@ const createMessages = (message, user, users) => {
     );
   }
 
-  if (messageUser && messageUser.avatar)
-    avatar.srcImage = `https://ya-praktikum.tech/api/v2/resources${messageUser.avatar}`;
+  if (messageUser && messageUser.avatar) {
+    // @ts-ignore
+    avatar[
+      "srcImage"
+    ] = `https://ya-praktikum.tech/api/v2/resources${messageUser.avatar}`;
+  }
 
   return new Message({
     text: message.content,
@@ -196,10 +204,11 @@ const buttonSend = new Button({
   classes: "button icon button_icon-message button--invisible",
   icon: iconSend,
   type: "button",
-  click: (event) => {
+  click: (event: Event) => {
     event.preventDefault();
     const state = store.getState();
     const content = inputMessage.props.value;
+    // @ts-ignore
     const socket = state.sockets[state.currentChatId];
 
     socket.send(
@@ -217,4 +226,5 @@ const withUser = connect((state) => ({
   chats: state.chats,
   currentChatId: state.currentChatId,
 }));
+// @ts-ignore
 export default withUser(Dialog);

@@ -1,0 +1,15 @@
+@import "variables.scss";
+@import "common";
+
+@import "../components/action/action";
+@import "../components/message/message";
+@import "../components/input/input";
+@import "../components/button/button";
+@import "../components/textField/textField";
+@import "../components/avatar/avatar";
+@import "../components/chat/dialogItem/dialogItem";
+
+@import "../components/profile/profile";
+@import "../components/chat/chat";
+@import "../components/authorization/authorization";
+@import "../components/registration/registration";

@@ -3,7 +3,7 @@ import { chatTmpl } from "./chat.tmpl";
 import Popup from "../popup";
 import TextField from "../textField";
 import Button from "../button";
-import iconRemove from "../../../static/icons/remove.svg";
+import iconRemove from "../../assets/icons/remove.svg";
 import { chatController } from "../../controllers/chatController";
 
 class ChatPage extends Block {
@@ -12,7 +12,7 @@ class ChatPage extends Block {
     this.props = props;
   }
 
-  componentDidMount(oldProps?: unknown): unknown {
+  componentDidMount(_?: unknown) {
     this.setProps({ popupCreateChat, popupRemove, popupAdd });
   }
 
@@ -29,6 +29,7 @@ export const popupAdd = new Popup({
     buttonName: "логин",
     containerClass: "popup__row",
     blur: (event: { target: HTMLInputElement }) => {
+      // @ts-ignore
       popupAdd.props.textField.setProps({
         value: event.target.value.trim(),
       });
@@ -44,6 +45,7 @@ export const popupAdd = new Popup({
     type: "button",
     name: "Добавить",
     click: () => {
+      // @ts-ignore
       chatController.addUser(popupAdd.props.textField.props.value);
       popupAdd.setProps({ classes: "invisible" });
     },
@@ -58,6 +60,7 @@ export const popupRemove = new Popup({
     buttonName: "логин",
     containerClass: "popup__row",
     blur: (event: { target: HTMLInputElement }) => {
+      // @ts-ignore
       popupRemove.props.textField.setProps({
         value: event.target.value.trim(),
       });
@@ -74,6 +77,7 @@ export const popupRemove = new Popup({
     type: "button",
     name: "Удалить",
     click: () => {
+      // @ts-ignore
       chatController.removeUser(popupRemove.props.textField.props.value);
       popupRemove.setProps({ classes: "invisible" });
     },
@@ -88,6 +92,7 @@ export const popupCreateChat = new Popup({
     buttonName: "Название чата",
     containerClass: "popup__row",
     blur: (event: { target: HTMLInputElement }) => {
+      // @ts-ignore
       popupCreateChat.props.textField.setProps({
         value: event.target.value.trim(),
       });
@@ -103,7 +108,8 @@ export const popupCreateChat = new Popup({
     type: "button",
     name: "Создать",
     click: () => {
-      const title = popupCreateChat.props.textField.props.value;
+      // @ts-ignore
+      const title: string = popupCreateChat.props.textField.props.value;
       chatController.create(title);
       popupCreateChat.setProps({ classes: "invisible" });
     },

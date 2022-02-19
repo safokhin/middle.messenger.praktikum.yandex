@@ -1,4 +1,4 @@
-import checkedIcon from "../../../../static/icons/checked.svg";
+import checkedIcon from "../../../assets/icons/checked.svg";
 
 //language=hbs
 export const dialogItem = `
