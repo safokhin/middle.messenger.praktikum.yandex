@@ -13,6 +13,10 @@ https://www.figma.com/file/gdBUWwKjPBJHBncHnQn7YH/Untitled?node-id=0%3A1
 
 https://infallible-bhaskara-6379cb.netlify.app/
 
+## Ссылка на приложение (Heroku)
+
+https://safohin.herokuapp.com
+
 ## Ссылка на pull request sprint_3
 
 https://github.com/safokhin/middle.messenger.praktikum.yandex/pull/5
